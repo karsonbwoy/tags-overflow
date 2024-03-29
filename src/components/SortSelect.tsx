@@ -3,14 +3,11 @@ import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
+import { useFilterStore } from '../store';
 
 export default function SortSelect() {
-    const [direction, setDirection] = React.useState('Ascending');
-
-    const handleChange = (event: SelectChangeEvent) => {
-        setDirection(event.target.value);
-    };
+    const { isAscending, changeSorting } = useFilterStore((state) => state)
 
     return (
         <Box sx={{ minWidth: 240 }}>
@@ -19,12 +16,12 @@ export default function SortSelect() {
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={direction}
+                    value={isAscending ? 'ascending' : 'descending'}
                     label="Sorting"
-                    onChange={handleChange}
+                    onChange={(e) => changeSorting(e.target.value)}
                 >
-                    <MenuItem value={'Ascending'}>Ascending</MenuItem>
-                    <MenuItem value={'Descending'}>Descending</MenuItem>
+                    <MenuItem value={'ascending'}>Ascending</MenuItem>
+                    <MenuItem value={'descending'}>Descending</MenuItem>
                 </Select>
             </FormControl>
         </Box>

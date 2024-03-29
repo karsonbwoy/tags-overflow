@@ -4,14 +4,10 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { useFilterStore } from '../store';
 
 export default function ItemCountSelect() {
-    const [count, setCount] = React.useState('10');
-
-    const handleChange = (event: SelectChangeEvent) => {
-        setCount(event.target.value as string);
-    };
-
+    const { count, setCount } = useFilterStore((state) => state)
     return (
         <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
@@ -21,7 +17,7 @@ export default function ItemCountSelect() {
                     id="demo-simple-select"
                     value={count}
                     label="Count"
-                    onChange={handleChange}
+                    onChange={(e) => setCount(e.target.value)}
                 >
                     <MenuItem value={10}>10</MenuItem>
                     <MenuItem value={20}>20</MenuItem>
