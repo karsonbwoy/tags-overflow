@@ -5,6 +5,7 @@ import Tags from './components/Tags';
 import { Stack } from '@mui/material';
 import { useFilterStore } from './store';
 
+const base = 'https://api.stackexchange.com/'
 const fetchedData = [
   {
     tagName: 'React',
@@ -123,6 +124,8 @@ const fetchedData = [
 
 function App() {
   const { count, isAscending } = useFilterStore((state) => (state))
+  const pathURL = `2.3/tags?page=1&pagesize=${count}&order=${isAscending ? 'asc' : 'desc'}&sort=popular&site=stackoverflow`
+  console.log(pathURL)
   return (
     <div className="App">
       <Stack spacing={2}>
