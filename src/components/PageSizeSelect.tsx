@@ -3,11 +3,11 @@ import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import { useFilterStore } from '../store';
 
-export default function ItemCountSelect() {
-    const { count, setCount } = useFilterStore((state) => state)
+export default function PageSizeSelect() {
+    const { pageSize, setPageSize } = useFilterStore((state) => state)
     return (
         <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
@@ -15,9 +15,9 @@ export default function ItemCountSelect() {
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={count}
+                    value={pageSize}
                     label="Count"
-                    onChange={(e) => setCount(e.target.value)}
+                    onChange={(e) => setPageSize(e.target.value)}
                 >
                     <MenuItem value={10}>10</MenuItem>
                     <MenuItem value={20}>20</MenuItem>

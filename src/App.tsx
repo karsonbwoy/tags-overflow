@@ -1,12 +1,14 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import Filter from './components/Filter';
 import Tags from './components/Tags';
+import PageSelect from './components/PageSelect';
 import { Stack } from '@mui/material';
 import { useFilterStore } from './store';
+import axios from 'axios';
 
 const base = 'https://api.stackexchange.com/'
-const fetchedData = [
+const fakeData = [
   {
     tagName: 'React',
     posts: 1,
@@ -123,14 +125,28 @@ const fetchedData = [
 ]
 
 function App() {
-  const { count, isAscending } = useFilterStore((state) => (state))
-  const pathURL = `2.3/tags?page=1&pagesize=${count}&order=${isAscending ? 'asc' : 'desc'}&sort=popular&site=stackoverflow`
-  console.log(pathURL)
+  const { pageSize, isAscending, page } = useFilterStore((state) => (state))
+  const pathURL = `2.3/tags?page=${page}&pagesize=${pageSize}&order=${isAscending ? 'asc' : 'desc'}&sort=popular&site=stackoverflow`
+  const [data, setData] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState(null)
+  console.log(base + pathURL)
+  // useEffect(() => {
+  //   axios(base + pathURL)
+  //     .then(response => setData(response.data.items))
+  //     .catch(error => {
+  //       console.log('Error', error);
+  //       setError(error);
+  //     })
+  //     .finally(() => setIsLoading(false))
+  // })
+
   return (
     <div className="App">
       <Stack spacing={2}>
         <Filter />
-        <Tags fetchedData={fetchedData.slice(0, parseInt(count))} />
+        <PageSelect />
+        <Tags fetchedData={fakeData.slice(0, parseInt(pageSize))} />
       </Stack>
     </div>
   );
