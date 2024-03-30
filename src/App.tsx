@@ -7,6 +7,7 @@ import { Stack } from '@mui/material';
 import { useFilterStore } from './store';
 import axios from 'axios';
 
+const pageCount = 99
 const base = 'https://api.stackexchange.com/'
 const fakeData = [
   {
@@ -145,7 +146,7 @@ function App() {
     <div className="App">
       <Stack spacing={2}>
         <Filter />
-        <PageSelect />
+        <PageSelect count={pageCount} />
         <Tags fetchedData={fakeData.slice(0, parseInt(pageSize))} />
       </Stack>
     </div>

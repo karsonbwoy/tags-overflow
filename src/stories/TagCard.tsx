@@ -1,6 +1,6 @@
 import { Box, Card, CardContent, Typography } from "@mui/material";
 
-type TagProps = {
+export type TagProps = {
     tagName: string,
     posts: number
 }
