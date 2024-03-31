@@ -127,27 +127,30 @@ const fakeData = [
 
 function App() {
   const { pageSize, isAscending, page } = useFilterStore((state) => (state))
-  const pathURL = `2.3/tags?page=${page}&pagesize=${pageSize}&order=${isAscending ? 'asc' : 'desc'}&sort=popular&site=stackoverflow`
+  const pathURL = base + `2.3/tags?page=${page}&pagesize=${parseInt(pageSize)}&order=${isAscending ? 'asc' : 'desc'}&sort=popular&site=stackoverflow`
   const [data, setData] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
-  console.log(base + pathURL)
-  // useEffect(() => {
-  //   axios(base + pathURL)
-  //     .then(response => setData(response.data.items))
-  //     .catch(error => {
-  //       console.log('Error', error);
-  //       setError(error);
-  //     })
-  //     .finally(() => setIsLoading(false))
-  // })
+  useEffect(() => {
+    setIsLoading(true);
+    setError(null)
+    axios(pathURL)
+      .then(response => setData(response.data.items))
+      .catch(error => {
+        console.log('Error', error);
+        setError(error);
+      })
+      .finally(() => setIsLoading(false))
+  }, [pathURL])
 
   return (
     <div className="App">
       <Stack spacing={2}>
         <Filter />
         <PageSelect count={pageCount} />
-        <Tags fetchedData={fakeData.slice(0, parseInt(pageSize))} />
+        {isLoading && 'Loading'}
+        {error && 'Failed to fetch data.'}
+        {!isLoading && !error && <Tags fetchedData={fakeData.slice(0, parseInt(pageSize))} />}
       </Stack>
     </div>
   );
