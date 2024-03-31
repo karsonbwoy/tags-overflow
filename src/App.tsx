@@ -3,6 +3,8 @@ import './App.css';
 import Filter from './components/Filter';
 import Tags from './components/Tags';
 import PageSelect from './components/PageSelect';
+import Loading from './components/Loading';
+import Fail from './components/Fail'
 import { Stack } from '@mui/material';
 import { useFilterStore } from './store';
 import axios from 'axios';
@@ -125,11 +127,19 @@ const fakeData = [
 
 ]
 
+type fetchedTags = {
+  has_synonyms: boolean,
+  is_moderator_only: boolean,
+  is_required: boolean,
+  count: number,
+  name: string
+}[] | null
+
 function App() {
   const { pageSize, isAscending, page } = useFilterStore((state) => (state))
   const pathURL = base + `2.3/tags?page=${page}&pagesize=${parseInt(pageSize)}&order=${isAscending ? 'asc' : 'desc'}&sort=popular&site=stackoverflow`
-  const [data, setData] = useState(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const [data, setData] = useState<fetchedTags>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState(null)
   useEffect(() => {
     setIsLoading(true);
@@ -138,18 +148,18 @@ function App() {
       .then(response => setData(response.data.items))
       .catch(error => {
         console.log('Error', error);
-        setError(error);
+        // setError(error);
       })
       .finally(() => setIsLoading(false))
   }, [pathURL])
 
   return (
     <div className="App">
-      <Stack spacing={2}>
+      <Stack spacing={2} >
         <Filter />
         <PageSelect count={pageCount} />
-        {isLoading && 'Loading'}
-        {error && 'Failed to fetch data.'}
+        {isLoading && <Loading />}
+        {error && <Fail />}
         {!isLoading && !error && <Tags fetchedData={fakeData.slice(0, parseInt(pageSize))} />}
       </Stack>
     </div>

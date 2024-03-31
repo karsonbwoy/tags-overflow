@@ -1,5 +1,6 @@
 .App {
-  max-width: fit-content;
-  margin-inline: 50px;
-  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 50px;
 }
