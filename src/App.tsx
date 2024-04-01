@@ -11,121 +11,6 @@ import axios from 'axios';
 
 const pageCount = 99
 const base = 'https://api.stackexchange.com/'
-const fakeData = [
-  {
-    tagName: 'React',
-    posts: 1,
-  },
-  {
-    tagName: 'JS',
-    posts: 2,
-  },
-  {
-    tagName: 'SB',
-    posts: 3,
-  },
-  {
-    tagName: 'C++',
-    posts: 4,
-  },
-  {
-    tagName: 'React',
-    posts: 1,
-  },
-  {
-    tagName: 'JS',
-    posts: 2,
-  },
-  {
-    tagName: 'SB',
-    posts: 3,
-  },
-  {
-    tagName: 'C++',
-    posts: 4,
-  },
-  {
-    tagName: 'React',
-    posts: 1,
-  },
-  {
-    tagName: 'JS',
-    posts: 2,
-  },
-  {
-    tagName: 'SB',
-    posts: 3,
-  },
-  {
-    tagName: 'C++',
-    posts: 4,
-  },
-  {
-    tagName: 'React',
-    posts: 1,
-  },
-  {
-    tagName: 'JS',
-    posts: 2,
-  },
-  {
-    tagName: 'SB',
-    posts: 3,
-  },
-  {
-    tagName: 'C++',
-    posts: 4,
-  },
-  {
-    tagName: 'React',
-    posts: 1,
-  },
-  {
-    tagName: 'JS',
-    posts: 2,
-  },
-  {
-    tagName: 'SB',
-    posts: 3,
-  },
-  {
-    tagName: 'C++',
-    posts: 4,
-  },
-  {
-    tagName: 'React',
-    posts: 1,
-  },
-  {
-    tagName: 'JS',
-    posts: 2,
-  },
-  {
-    tagName: 'SB',
-    posts: 3,
-  },
-  {
-    tagName: 'C++',
-    posts: 4,
-  },
-  {
-    tagName: 'React',
-    posts: 1,
-  },
-  {
-    tagName: 'JS',
-    posts: 2,
-  },
-  {
-    tagName: 'SB',
-    posts: 3,
-  },
-  {
-    tagName: 'C++',
-    posts: 4,
-  },
-
-]
 
 type fetchedTags = {
   has_synonyms: boolean,
@@ -160,7 +45,7 @@ function App() {
         <PageSelect count={pageCount} />
         {isLoading && <Loading />}
         {error && <Fail />}
-        {!isLoading && !error && <Tags fetchedData={fakeData.slice(0, parseInt(pageSize))} />}
+        {data && <Tags fetchedData={data.map((el, i) => ({ tagName: el.name, posts: el.count }))} />}
       </Stack>
     </div>
   );
