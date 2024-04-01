@@ -45,7 +45,7 @@ function App() {
         <PageSelect count={pageCount} />
         {isLoading && <Loading />}
         {error && <Fail />}
-        {data && <Tags fetchedData={data.map((el, i) => ({ tagName: el.name, posts: el.count }))} />}
+        {!isLoading && !error && data && <Tags fetchedData={data.map((el, i) => ({ tagName: el.name, posts: el.count }))} />}
       </Stack>
     </div>
   );
