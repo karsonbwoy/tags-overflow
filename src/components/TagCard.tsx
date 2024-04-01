@@ -6,8 +6,8 @@ export type TagProps = {
 }
 export default function TagCard({ tagName, posts }: TagProps) {
     return (
-        <Box width='150px'>
-            <Card>
+        <Box width='200px' height='100%'>
+            <Card sx={{ height: '100%' }}>
                 <CardContent>
                     <Typography gutterBottom variant='h5' component='div'>
                         {tagName}
