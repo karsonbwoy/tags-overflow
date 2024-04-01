@@ -1,11 +1,11 @@
 import * as React from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-import { Alert } from '@mui/material';
 
-export default function Fail() {
+export default function Loading() {
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Alert severity='error'>Failed to fetch data.</Alert>
+            <CircularProgress />
         </Box>
     );
 }
