@@ -10,7 +10,7 @@ type FilterStore = {
 }
 
 export const useFilterStore = create<FilterStore>((set) => ({
-    isAscending: true,
+    isAscending: false,
     pageSize: '10',
     page: 1,
     setPageSize: (value) => {

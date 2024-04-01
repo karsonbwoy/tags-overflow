@@ -9,7 +9,7 @@ import { Stack } from '@mui/material';
 import { useFilterStore } from './store';
 import axios from 'axios';
 
-const pageCount = 99
+const pageCount = 25 // page above 25 requires access token or app key
 const base = 'https://api.stackexchange.com/'
 
 type fetchedTags = {
