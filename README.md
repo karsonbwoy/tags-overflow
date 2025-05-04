@@ -1,46 +1,121 @@
-# Getting Started with Create React App
+# Tags Overflow App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Tags Overflow App fetches and displays tags from the Stack Overflow API. The application is built using React, Material-UI, Zustand for state management, and Storybook for UI component development.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Tag Display**: Fetch and display tags from the Stack Overflow API.
+- **Pagination**: Navigate through pages of tags.
+- **Sorting**: Sort tags in ascending or descending order.
+- **Page Size Selection**: Choose the number of tags displayed per page.
+- **Loading State**: Show a loading spinner while fetching data.
+- **Error Handling**: Display an error message if data fetching fails.
+- **Storybook Integration**: View and test UI components in isolation.
 
-### `npm start`
+## Project Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+src/
+├── components/         # Reusable React components
+│   ├── Fail/           # Error message component
+│   ├── Filter/         # Sorting and page size controls
+│   ├── Loading/        # Loading spinner component
+│   ├── PageSelect/     # Pagination component
+│   ├── PageSizeSelect/ # Page size selection component
+│   ├── SortSelect/     # Sorting control component
+│   ├── TagCard/        # Individual tag card component
+│   └── Tags/           # Tag-related components
+├── stories/            # Storybook stories for components
+├── App.tsx             # Main application component
+├── store.ts            # Zustand store for state management
+├── index.tsx           # Application entry point
+├── setupTests.ts       # Test setup file
+├── index.css           # Global styles
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Installation
 
-### `npm test`
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/your-repo/tags-overflow.git
+    cd tags-overflow
+    ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Install dependencies:
+    ```bash
+    npm install
+    ```
 
-### `npm run build`
+## Usage
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Start the Development Server
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Run the application locally:
+```bash
+npm start
+```
+The app will be available at [http://localhost:3000](http://localhost:3000).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Run Storybook
 
-### `npm run eject`
+View and test UI components in isolation:
+```bash
+npm run storybook
+```
+Storybook will be available at [http://localhost:6006](http://localhost:6006).
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Run Tests
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Execute unit tests:
+```bash
+npm test
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Components
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- **Tags**: Displays a grid of tags with their respective post counts.
+- **TagCard**: A card component to display individual tag details.
+- **Filter**: Contains sorting and page size selection controls.
+- **PageSelect**: Pagination component to navigate through pages.
+- **Loading**: Displays a loading spinner.
+- **Fail**: Displays an error message when data fetching fails.
 
-## Learn More
+## State Management
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The app uses Zustand for state management. The `useFilterStore` manages:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- `isAscending`: Sorting order.
+- `pageSize`: Number of tags per page.
+- `page`: Current page number.
+
+## API Integration
+
+The app fetches tags from the Stack Overflow API using Axios. The API endpoint is dynamically constructed based on the current state (page, page size, sorting order).
+
+## Storybook
+
+Storybook is used to document and test UI components. Stories are located in the `src/stories/` directory.
+
+## Scripts
+
+- `npm start`: Start the development server.
+- `npm run build`: Build the app for production.
+- `npm test`: Run tests.
+- `npm run storybook`: Start Storybook.
+- `npm run build-storybook`: Build Storybook for production.
+
+## Dependencies
+
+- React
+- Material-UI
+- Zustand
+- Axios
+- Storybook
+
+### Linting
+
+The project uses ESLint with Storybook recommendations.
+
+## License
+
+This project is licensed under the MIT License.
